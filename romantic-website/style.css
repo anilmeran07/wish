@@ -1,0 +1,231 @@
+:root {
+  --rose: #e11d48;
+  --rose-light: #fb7185;
+  --blush: #f9a8d4;
+  --wine: #881337;
+  --paper: #fffaf8;
+  --ink: #3f2229;
+  --muted: #866c72;
+  --gold: #d4af37;
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "DM Sans", Arial, sans-serif;
+  --script: "Sacramento", cursive;
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #fff7f9;
+  color: var(--ink);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; }
+button:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
+
+.birthday-page {
+  min-height: 100vh;
+  min-height: 100svh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 28px 20px 16px;
+  background:
+    radial-gradient(ellipse at 12% 18%, rgba(249, 168, 212, .25), transparent 30%),
+    radial-gradient(ellipse at 90% 82%, rgba(212, 175, 55, .13), transparent 25%),
+    linear-gradient(145deg, #fffafb 0%, #fff1f4 52%, #f9e9ee 100%);
+}
+.birthday-page::before,
+.birthday-page::after {
+  width: min(78vw, 820px);
+  aspect-ratio: 1;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  border: 1px solid rgba(136, 19, 55, .07);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+.birthday-page::after { width: min(66vw, 690px); border-color: rgba(212, 175, 55, .12); }
+.ambient { position: absolute; z-index: 0; color: rgba(225, 29, 72, .3); font-family: var(--serif); animation: drift 8s ease-in-out infinite alternate; pointer-events: none; }
+.ambient-one { top: 12%; left: 13%; font-size: 19px; }
+.ambient-two { top: 23%; right: 12%; font-size: 23px; animation-delay: -3s; }
+.ambient-three { right: 19%; bottom: 13%; color: var(--gold); font-size: 21px; animation-delay: -5s; }
+.heart-layer { position: fixed; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+.floating-heart { position: absolute; bottom: -50px; color: var(--rose); opacity: 0; filter: drop-shadow(0 3px 8px rgba(136,19,55,.1)); animation: heart-drift var(--heart-duration, 14s) ease-in-out var(--heart-delay, 0s) infinite; }
+.heart-one { left: 8%; font-size: 19px; --heart-duration: 13s; --heart-delay: -3s; --heart-drift: 15px; }
+.heart-two { left: 19%; color: var(--rose-light); font-size: 36px; --heart-duration: 16s; --heart-delay: -10s; --heart-drift: -21px; }
+.heart-three { right: 9%; font-size: 24px; --heart-duration: 14s; --heart-delay: -7s; --heart-drift: -13px; }
+.heart-four { right: 18%; color: var(--gold); font-size: 42px; --heart-duration: 18s; --heart-delay: -2s; --heart-drift: 18px; }
+.heart-five { left: 31%; color: var(--blush); font-size: 16px; --heart-duration: 17s; --heart-delay: -13s; --heart-drift: 12px; }
+.heart-six { right: 32%; font-size: 28px; --heart-duration: 15s; --heart-delay: -5s; --heart-drift: -15px; }
+.heart-seven { left: 49%; color: var(--gold); font-size: 13px; --heart-duration: 12s; --heart-delay: -8s; --heart-drift: 8px; }
+
+.birthday-card {
+  width: min(100%, 590px);
+  min-height: min(610px, calc(100svh - 112px));
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: clamp(22px, 5vw, 36px) clamp(22px, 7vw, 68px) 25px;
+  border: 1px solid rgba(212, 175, 55, .7);
+  border-radius: 4px;
+  background: rgba(255, 250, 248, .94);
+  box-shadow: 0 25px 90px rgba(89, 29, 48, .13), inset 0 0 0 6px rgba(255, 255, 255, .72);
+  text-align: center;
+  animation: card-arrive .8s cubic-bezier(.2,.7,.2,1) both;
+}
+.birthday-card::before { position: absolute; inset: 9px; border: 1px solid rgba(136, 19, 55, .08); content: ""; pointer-events: none; }
+.card-topline { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.card-date { color: #966d74; font-size: 9px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.music-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid rgba(136, 19, 55, .12);
+  border-radius: 30px;
+  background: rgba(255,255,255,.62);
+  color: var(--wine);
+  cursor: pointer;
+  font-size: 9px;
+  transition: background .2s, border-color .2s, transform .2s;
+}
+.music-control:hover { transform: translateY(-1px); border-color: rgba(225,29,72,.35); background: white; }
+.music-control > span:first-child { color: var(--rose); font-size: 14px; }
+.music-control.is-playing > span:first-child { animation: music-pulse .7s ease-in-out infinite alternate; }
+.surprise-progress { position: relative; z-index: 1; display: flex; justify-content: center; gap: 6px; margin: 20px 0 -12px; }
+.progress-dot { width: 5px; height: 5px; border-radius: 5px; background: rgba(136,19,55,.16); transition: width .25s ease, background .25s ease; }
+.progress-dot.is-active { width: 19px; background: var(--rose); }
+.progress-dot.is-complete { background: var(--gold); }
+
+.card-content {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding: 28px 0 24px;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.card-content.is-changing { opacity: 0; transform: translateY(10px); }
+.card-content.is-note h1 { max-width: 470px; margin-inline: auto; font-size: clamp(34px, 6.5vw, 48px); letter-spacing: -.035em; }
+.card-content.is-finale .card-heart { color: var(--gold); }
+.eyebrow { margin: 0 0 13px; color: var(--rose); font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+.card-heart { display: block; margin: 0 auto 7px; color: var(--rose); font-size: 26px; animation: heart-beat 1.8s ease-in-out infinite; }
+.card-content h1 { margin: 0 0 19px; color: var(--wine); font-family: var(--serif); font-size: clamp(39px, 8vw, 62px); font-weight: 500; letter-spacing: -.045em; line-height: 1.1; }
+.card-content h1 em { color: var(--rose); font-weight: 400; }
+.card-message { max-width: 420px; margin: 0 auto; color: #70575d; font-family: var(--serif); font-size: clamp(15px, 2.8vw, 18px); line-height: 1.85; }
+.card-signoff { margin: 19px 0 0; color: #9a7c80; font-size: 10px; letter-spacing: .04em; }
+.card-signoff span { color: var(--wine); font-family: var(--script); font-size: 25px; }
+
+.card-bottom { position: relative; z-index: 1; }
+.step-indicator { min-height: 15px; margin: 0 0 11px; color: #987c81; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; }
+.next-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 51px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 0 22px;
+  border: 1px solid rgba(255, 227, 181, .45);
+  border-radius: 999px;
+  background: linear-gradient(115deg, #a71943, #881337 52%, #67102c);
+  box-shadow: 0 10px 24px rgba(136,19,55,.22), inset 0 1px 0 rgba(255,255,255,.2);
+  color: white;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .045em;
+  animation: button-glow 3s ease-in-out infinite;
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+}
+.next-button::before { position: absolute; z-index: -1; inset: 0; background: linear-gradient(105deg, transparent 25%, rgba(255,255,255,.26) 48%, rgba(249,214,152,.35) 52%, transparent 76%); content: ""; transform: translateX(-115%); transition: transform .75s cubic-bezier(.2,.7,.2,1); }
+.next-button:hover { transform: translateY(-3px) scale(1.025); border-color: rgba(255,235,201,.88); box-shadow: 0 14px 31px rgba(136,19,55,.28), 0 0 0 5px rgba(225,29,72,.06); }
+.next-button:hover::before { transform: translateX(115%); }
+.next-button:active { transform: translateY(-1px) scale(.99); }
+.next-button > span { position: relative; z-index: 1; color: #ffe4a8; font-size: 17px; transition: transform .25s ease; }
+.next-button:hover > span { transform: translateX(4px) rotate(-8deg); }
+.next-button:disabled { cursor: wait; animation: none; opacity: .8; }
+.music-status { min-height: 14px; margin: 9px 0 0; color: #9a6669; font-size: 9px; }
+.page-footer { width: min(590px, 100%); position: relative; z-index: 1; display: flex; justify-content: center; align-items: center; gap: 10px; padding-top: 15px; color: #90777b; font-size: 9px; letter-spacing: .05em; text-align: center; }
+.page-footer strong { color: var(--wine); font-weight: 600; }
+.footer-heart { color: var(--rose); }
+
+.balloon-layer { position: fixed; inset: 0; z-index: 5; overflow: hidden; pointer-events: none; }
+.balloon {
+  width: var(--balloon-size, 28px);
+  height: calc(var(--balloon-size, 28px) * 1.22);
+  position: absolute;
+  bottom: -100px;
+  left: var(--balloon-left);
+  border-radius: 50% 50% 46% 46%;
+  background: var(--balloon-color);
+  box-shadow: inset -5px -5px 9px rgba(94,24,49,.12), inset 4px 5px 9px rgba(255,255,255,.36), 0 7px 22px rgba(84,23,48,.09);
+  animation: balloon-rise var(--balloon-duration, 5s) cubic-bezier(.24,.56,.47,.99) forwards;
+}
+.balloon::before { width: 5px; height: 5px; position: absolute; bottom: -3px; left: calc(50% - 2px); background: var(--balloon-color); content: ""; transform: rotate(45deg); }
+.balloon::after { width: 1px; height: 62px; position: absolute; top: calc(100% + 4px); left: 50%; background: rgba(110,76,82,.34); content: ""; }
+.balloon-sparkle { position: absolute; top: -50px; left: var(--balloon-left); color: var(--gold); font-size: 17px; animation: sparkle-fall 2.4s ease-in forwards; }
+.celebration-heart-layer { position: fixed; inset: 0; z-index: 6; overflow: hidden; pointer-events: none; }
+.celebration-heart { position: absolute; bottom: -45px; left: var(--heart-left); color: var(--heart-color); font-size: var(--heart-size); filter: drop-shadow(0 4px 8px rgba(136,19,55,.16)); animation: heart-pop-up var(--heart-duration, 4s) cubic-bezier(.2,.6,.35,1) forwards; }
+
+@keyframes card-arrive { from { opacity: 0; transform: translateY(15px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes drift { from { transform: translateY(0) rotate(-5deg); opacity: .4; } to { transform: translateY(-13px) rotate(5deg); opacity: .9; } }
+@keyframes heart-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes heart-drift { 0% { transform: translate3d(0, 0, 0) rotate(-9deg) scale(.8); opacity: 0; } 12% { opacity: .28; } 75% { opacity: .23; } 100% { transform: translate3d(var(--heart-drift), -112vh, 0) rotate(13deg) scale(1.08); opacity: 0; } }
+@keyframes heart-pop-up { 0% { transform: translate3d(0, 0, 0) scale(.55) rotate(-12deg); opacity: 0; } 12% { opacity: .9; } 78% { opacity: .75; } 100% { transform: translate3d(var(--heart-drift), -105vh, 0) scale(1.12) rotate(15deg); opacity: 0; } }
+@keyframes button-glow { 0%, 100% { box-shadow: 0 10px 24px rgba(136,19,55,.2), inset 0 1px 0 rgba(255,255,255,.2); } 50% { box-shadow: 0 12px 28px rgba(136,19,55,.28), 0 0 0 4px rgba(225,29,72,.045), inset 0 1px 0 rgba(255,255,255,.2); } }
+@keyframes music-pulse { from { transform: scale(.85); } to { transform: scale(1.15); } }
+@keyframes balloon-rise { 0% { transform: translate3d(0, 0, 0) rotate(-7deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translate3d(var(--balloon-drift), -120vh, 0) rotate(9deg); opacity: 0; } }
+@keyframes sparkle-fall { 0% { transform: translateY(0) rotate(0); opacity: 0; } 15% { opacity: .8; } 100% { transform: translateY(80vh) rotate(170deg); opacity: 0; } }
+
+@media (max-width: 520px) {
+  .birthday-page { justify-content: center; padding: 15px 15px 10px; }
+  .birthday-card { min-height: min(570px, calc(100svh - 82px)); padding: 20px 22px 19px; }
+  .birthday-card::before { inset: 6px; }
+  .card-topline { align-items: flex-start; }
+  .card-date { padding-top: 9px; font-size: 8px; }
+  .music-control { gap: 5px; padding: 6px 8px; font-size: 8px; }
+  .heart-one { left: 1%; }
+  .heart-two { left: 0; font-size: 30px; }
+  .heart-three { right: 1%; }
+  .heart-four { right: 0; font-size: 34px; }
+  .heart-five { left: 2%; }
+  .heart-six { right: 2%; }
+  .heart-seven { left: 50%; }
+  .surprise-progress { margin-top: 15px; }
+  .card-content { padding: 18px 0; }
+  .card-content h1 { font-size: clamp(39px, 11vw, 52px); }
+  .card-content.is-note h1 { font-size: clamp(32px, 8.5vw, 42px); }
+  .card-message { font-size: 15px; line-height: 1.75; }
+  .next-button { width: min(100%, 290px); min-height: 50px; padding-inline: 14px; font-size: 9px; }
+  .page-footer { gap: 6px; font-size: 8px; }
+}
+@media (max-height: 690px) {
+  .birthday-page { padding-top: 12px; }
+  .birthday-card { min-height: min(520px, calc(100svh - 74px)); padding-top: 17px; padding-bottom: 15px; }
+  .card-content { padding: 12px 0; }
+  .card-content h1 { margin-bottom: 12px; font-size: clamp(35px, 8vh, 50px); }
+  .card-content.is-note h1 { font-size: clamp(30px, 7vh, 40px); }
+  .card-heart { margin-bottom: 3px; font-size: 21px; }
+  .card-message { font-size: 14px; line-height: 1.65; }
+  .card-signoff { margin-top: 11px; }
+  .next-button { min-height: 45px; }
+  .page-footer { padding-top: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}

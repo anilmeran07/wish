@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f9">
+  <meta name="description" content="A birthday surprise for Pal, made with love by Neel.">
+  <title>Happy Birthday, Pal!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="birthday-page">
+    <div class="ambient ambient-one" aria-hidden="true">✦</div>
+    <div class="ambient ambient-two" aria-hidden="true">♡</div>
+    <div class="ambient ambient-three" aria-hidden="true">✧</div>
+    <div class="heart-layer" id="heart-layer" aria-hidden="true">
+      <span class="floating-heart heart-one">♡</span>
+      <span class="floating-heart heart-two">♥</span>
+      <span class="floating-heart heart-three">♡</span>
+      <span class="floating-heart heart-four">♥</span>
+      <span class="floating-heart heart-five">♡</span>
+      <span class="floating-heart heart-six">♥</span>
+      <span class="floating-heart heart-seven">♡</span>
+    </div>
+
+    <section class="birthday-card" aria-labelledby="birthday-title">
+      <div class="card-topline">
+        <span class="card-date">17 November</span>
+        <button class="music-control" id="music-toggle" type="button" aria-label="Play Tum Se Hi" aria-pressed="false">
+          <span aria-hidden="true">♫</span><span id="music-label">Tum Se Hi</span>
+        </button>
+      </div>
+
+      <div class="surprise-progress" aria-hidden="true">
+        <span class="progress-dot is-active"></span><span class="progress-dot"></span>
+        <span class="progress-dot"></span><span class="progress-dot"></span><span class="progress-dot"></span>
+      </div>
+
+      <div class="card-content" id="card-content" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow" id="card-eyebrow">A little surprise, made just for you</p>
+        <span class="card-heart" aria-hidden="true">♥</span>
+        <h1 id="birthday-title">Happy Birthday,<br><em data-partner-name>Pal</em></h1>
+        <p class="card-message" id="card-message">To the girl who makes every day warmer just by being in it: I hope today gives back even a little of the joy, comfort, and happiness you bring to everyone around you. Happy birthday, my love.</p>
+        <p class="card-signoff" id="card-signoff">With all my love, <span data-your-name>Neel</span></p>
+      </div>
+
+      <div class="card-bottom">
+        <p class="step-indicator" id="step-indicator">Your surprise is waiting · 1 of 5</p>
+        <button class="next-button" id="next-button" type="button">Open your first surprise <span aria-hidden="true">→</span></button>
+        <p class="music-status" id="music-status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>For <strong data-partner-name>Pal</strong>, from <strong data-your-name>Neel</strong></span>
+      <span class="footer-heart" aria-hidden="true">♥</span>
+      <span>Always in your corner</span>
+    </footer>
+    <div class="celebration-heart-layer" id="celebration-heart-layer" aria-hidden="true"></div>
+    <div class="balloon-layer" id="balloon-layer" aria-hidden="true"></div>
+  </main>
+
+  <!-- Playback starts on a tap so the surprise works with browser audio rules. -->
+  <audio id="background-music" preload="none" loop></audio>
+</body>
+</html>
